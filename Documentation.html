@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  
+  <head>
+
+<meta charset="UTF-8">
+<link rel="stylesheet" href="documentation.css">
+</head>
+  <body>
+    
+    <h1 id ="webapi">WEB API</h1>
+    
+    <p>Based on simple REST principles, the Web API endpoints return JSON metadata about the recource you're looking for (if we have it of course).</p>
+    <img src="https://www.partech.nl/publication-image/%7B46D64AEE-5C24-439A-8659-3E6E17F3ED9A%7D" alt="web api" />
+    
+    
+    
+    
+    <h1 id ="requests">Requests</h1>
+    <table class="request_table">
+      <thead>
+        
+      <tr>
+        <th>Method</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>GET</td>
+        <td>Retrieves resources</td> 
+      </tr>
+      <tr>
+        <td>POST</td>
+        <td>Creates resources</td>
+      </tr>
+      <tr>
+        <td>PUT</td>
+        <td>Replaces or updates resources</td>
+      </tr>
+      <tr>
+        <td>DELETE</td>
+        <td>Deletes resources</td>
+      </tr>
+      </tbody>
+  </table>
+    
+    
+    
+    
+  <h1 id="responsestatus">Response Status Code</h1>
+    <p>Web API uses the following response status codes.</p>
+    <table class="response_table">
+      <thead>
+      <tr>
+        <th>Status Code</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>200</td>
+        <td>OK- the request has succeeded. The client can read the result of the request in the <br> body and the headers of the response.</td> 
+      </tr>
+      <tr>
+        <td>400</td>
+        <td>Bad Request - The request could not be understood by the server due to <br> malformed syntax.</td>
+      </tr>
+      <tr>
+        <td>403</td>
+        <td>Forbidden - The client does not have access rights to the contents.</td>
+      </tr>
+      <tr>
+        <td>404</td>
+        <td>Not Found - <br> The server cannot find the requested resource.</td>
+      </tr>
+      </tbody>
+  </table>
+    
+    
+    
+    
+    
+    
+    
+    <h1 id="functions">Functions</h1>
+    <table>
+      <tr>
+        <th>Function</th>
+        <th>Key Rest Element</th>        
+      </tr>
+      <tr>
+        <td>The end point of the URI: /api/contents </td>
+        <td>The endpoint is a resource Identifier, which specifies the specific location the resource the user is trying to acess </td>         
+      </tr>
+      <tr>
+        <td>HTTP methods: GET,POST,DELETE,PUT (CRUD)</td>
+        <td>These methods are used for pure rest implementation, specifically to retrieve a resource or information about a resource</td>        
+      </tr>
+      <tr>
+        <td>The MIME format (JSON)</td>
+        <td>Java script object notation(JSON) is used to translate code into a human readable language. This is used for the developer to properly communicate with their API.</td>        
+      </tr>
+    
+  </table>
+  
+  
+  <h2 id="uri_examples">Requests the web service expect to receive</h2>
+  <table id="requests_examples">
+    <thead>
+      <tr>
+        <th>Endpoint URI</th>
+        <th>Short description api</th>
+        <th>HTTP method</th>
+        <th>Response</th>
+        <th>Example data</th>
+        <th>Response header</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>http://localhost:3000/tableContents</td>
+        <td>This will get all the phones in the database</td>
+        <td>GET</td>
+        <td>200 (meaning successful)</td>
+        <td> {
+        "id": 1,
+        "brand": "Fairphone",
+        "model": "FP3",
+        "os": "Android",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Fairphone_3_modules_on_display.jpg/320px-Fairphone_3_modules_on_display.jpg",
+        "screensize": 5.65
+    },<br>
+    {
+        "id": 3,
+        "brand": "Huawei",
+        "model": "FP3",
+        "os": "Android",
+        "image": "https://used2cell.nl/wp-content/uploads/2020/03/huawei-P30-Pro-zwart.jpg",
+        "screensize": 4.44
+    },</td>
+        <td>content-type →application/json; charset=utf-8</td>
+      </tr>
+      <tr>
+        <td>http://localhost:3000/Samsung, http://localhost:3000/iPhone</td>
+        <td>This will insert "Samsung" and "Iphone" phone data</td>
+        <td>POST</td>
+        <td>200 (meaning successful)</td>
+        <td>There will be nothing, only a 200 response, if you do "http://localhost:3000/tableContents", you will see the added data.</td>
+        <td>content-type →application/json; charset=utf-8</td>
+      </tr>
+      <tr>
+        <td>http://localhost:3000/updateToHuawei/:id, http://localhost:3000/updateToSamsung/:id,<br> http://localhost:3000/updateToApple/:id, http://localhost:3000/updateToNokia/:id</td>
+        <td>This will update the phone data by id to either Huawei,Samsung,Apple etc., so instead of ":id" you write: 1 or 2 or any integer.</td>
+        <td>PUT</td>
+        <td>200 (meaning successful)</td>
+        <td>There will be nothing, only a 200 response, if you do "/tableContents", you will see the updated data.</td>
+        <td>content-type →application/json; charset=utf-8</td>
+      </tr>
+      <tr>
+        <td>http://localhost:3000/phones/:brand</td>
+        <td>This will get the phone data by the "brand" you want, so instead of ":brand" you write the phone brand you want</td>
+        <td>GET</td>
+        <td>200 (meaning successful)</td>
+        <td><strong>example with "Samsung" instead of ":brand"</strong> <br>
+        [
+         {
+        "id": 4,
+        "brand": "Samsung",
+        "model": "Galaxy S21",
+        "os": "Android",
+        "image": "https://media.s-bol.com/Y5qOEKNz67XA/550x739.jpg",
+        "screensize": 5.54
+        }
+      ]</td>
+        <td>content-type →application/json; charset=utf-8</td>
+      </tr>
+      <tr>
+        <td>http://localhost:3000/delete/:id</td>
+        <td>This will delete phone data by id, so instead of ":id" you write: 1 or 2 or any integer.</td>
+        <td>DELETE</td>
+        <td>200 (meaning successful)</td>
+        <td>There will be nothing, only a 200 response, if you do "http://localhost:3000/tableContents", you will see the deleted data is not there.</td>
+        <td>content-type →application/json; charset=utf-8</td>
+      </tr>
+      </tbody>
+  </table>
+    
+    
+  </body>
+</html>

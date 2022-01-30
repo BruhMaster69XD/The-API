@@ -1,0 +1,48 @@
+body{
+  background-color: lightgray;
+}
+
+#webapi{
+background-color: yellow;
+font-size: 50px;
+}
+
+#requests{
+background-color: blue;
+}
+
+#responsestatus{
+background-color: red;
+}
+
+#functions{
+background-color: green;
+}
+
+#uri_examples{
+background-color: orange;
+}
+
+.request_table,.response_table, #requests_examples {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.request_table thead tr, .response_table thead tr,#requests_examples thead tr  {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.request_table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+table, th, td {
+  border: 1px solid black;
+  
+}
