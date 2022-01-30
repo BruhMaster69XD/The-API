@@ -18,9 +18,6 @@ app.post('/iPhone', function(req,res){
 	db.run(`INSERT INTO phones (brand, model, os, image, screensize) VALUES (?, ?, ?, ?, ?)`,
 	["Apple", "Iphone 11", "IOS", "https://images.fixjeiphone.nl/wp-content/uploads/2021/03/Refurbished-iPhone-11-Pro-Max-groen-1.png", "5.40"], function(err, rows){
 		
-		
-
-
 		return res.json(rows)
 	});
 	
@@ -32,12 +29,8 @@ app.post('/Samsung', function(req,res){
 	db.run(`INSERT INTO phones (brand, model, os, image, screensize) VALUES (?, ?, ?, ?, ?)`,
 	["Samsung", "Galaxy s21", "Android", "https://media.s-bol.com/Y5qOEKNz67XA/550x739.jpg", "5.54"], function(err, rows){
 
-
-
 		return res.json(rows)
 	});
-	
-
 });
 
 app.put('/updateToHuawei/:id', function(req, res){
@@ -49,7 +42,6 @@ app.put('/updateToHuawei/:id', function(req, res){
 		if (isNaN(id)) return res.status(400).send("You can only input integers")
 		else return res.json(rows)
 	});
-
 });
 
 app.put('/updateToSamsung/:id', function(req, res){
@@ -61,7 +53,6 @@ app.put('/updateToSamsung/:id', function(req, res){
 
 		return res.json(rows)
 	});
-
 });
 
 app.put('/updateToApple/:id', function(req, res){
@@ -69,7 +60,6 @@ app.put('/updateToApple/:id', function(req, res){
                     SET brand=?, model=?, os=?, image=?,
                     screensize=? WHERE id=?`,
                     ["Apple", "Iphone 11", "IOS", "https://images.fixjeiphone.nl/wp-content/uploads/2021/03/Refurbished-iPhone-11-Pro-Max-groen-1.png", "5.40", req.params.id], function(err, rows){
-
 
 		return res.json(rows)
 	});
@@ -104,10 +94,7 @@ app.delete('/delete/:id', function(req, res){
 app.get('/phones/:brand', function(req, res) {// search for a specific brand.
 	var brand = req.params.brand;
   db.all(`SELECT * FROM phones WHERE brand=?`,brand, function(err, rows) {
-		/*if (err) {
-			console.log(err);
-			res.status(404).json({"ERROR": "The given brand does not exist"});	
-  		}*/
+
 	if (brand === "Apple") res.status(403).send('Non premium customers cant look at our apple products')
 	else if (!isNaN(brand)) res.status(400).send('Chief, you cannot use numbers to look for brands. -_-')
 	else if (brand === "Samsung") return res.json(rows)
@@ -116,33 +103,16 @@ app.get('/phones/:brand', function(req, res) {// search for a specific brand.
 	else return res.status(404).send("Couldnt find your brand. :(")
 		  
     });
-	//const phnone_brand = phones.find(pb => pb.brand === req.params.brand);
-    //if(!req.params.brand) res.status(404).json({error: 'The course with the given brand was not found'});
-	//if (!brand){res.status(404).json({"ERROR": "The given brand does not exist"});
-//}
-
-	
+		
 });
 
 
-app.get('/tableContents', function(req, res) {// search for a specific brand.
-    // Example SQL statement to select the name of all products from a specific brand
+app.get('/tableContents', function(req, res) {
     db.all(`SELECT * FROM phones `, function(err, rows) {
-		//if (err) {
-		//	console.error(err.message);
 			
-  	//	}
-		 
-		
-		
     	return res.json(rows)
-    });
-	//const phnone_brand = phones.find(pb => pb.brand === req.params.brand);
-    //if(!req.params.brand) res.status(404).json({error: 'The course with the given brand was not found'});
-
-	
+    });	
 });
-
 
 app.listen(3000);
 console.log("Your Web server should be up and running, waiting for requests to come in. Try http://localhost:3000/hello");
