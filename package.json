@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "express": "^4.17.2",
+    "joi": "^13.1.0",
+    "package.json": "^2.0.1",
+    "sqlite": "^4.0.23",
+    "sqlite3": "^5.0.2"
+  }
+}
